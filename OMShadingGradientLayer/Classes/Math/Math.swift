@@ -22,60 +22,51 @@
 //
 
 import UIKit
-
-
 // clamp a number between lower and upper.
 public func clamp<T: Comparable>(_ value: T, lower: T, upper: T) -> T {
     return min(max(value, lower), upper)
 }
-
 // is the number between lower and upper.
-public func between<T: Comparable>(_ value: T, lower: T, upper: T , include: Bool = true) -> Bool {
+public func between<T: Comparable>(_ value: T, lower: T, upper: T, include: Bool = true) -> Bool {
     let left = min(lower, upper)
     let right = max(lower, upper)
     return include ? (value >= left && value <= right) : (value > left && value < right)
 }
-
 // min radius from rectangle
 public func minRadius(_ size: CGSize) -> CGFloat {
     assert(size != CGSize.zero)
-    return size.min() * 0.5;
+    return size.min() * 0.5
 }
-
 // max radius from a rectangle (pythagoras)
 public func maxRadius(_ size: CGSize) -> CGFloat {
     assert(size != CGSize.zero)
     return 0.5 * sqrt(size.width * size.width + size.height * size.height)
 }
-
 // monotonically increasing function
-public func monotonic(_ numberOfElements:Int) -> [CGFloat] {
+public func monotonic(_ numberOfElements: Int) -> [CGFloat] {
     assert(numberOfElements > 0)
-    var monotonicFunction:[CGFloat] = []
-    let numberOfLocations:CGFloat = CGFloat(numberOfElements - 1)
-    for locationIndex in 0 ..< numberOfElements  {
+    var monotonicFunction: [CGFloat] = []
+    let numberOfLocations: CGFloat = CGFloat(numberOfElements - 1)
+    for locationIndex in 0 ..< numberOfElements {
          monotonicFunction.append(CGFloat(locationIndex) / numberOfLocations)
     }
     return monotonicFunction
 }
-
 // redistributes values on a slope (ease-in ease-out)
-public func slope( x:Float, A:Float) -> Float {
-    let p = powf(x,A);
-    return p/(p + powf(1.0-x, A));
+public func slope( slopeX: Float, slopeA: Float) -> Float {
+    let slopeP = powf(slopeX, slopeA)
+    return slopeP/(slopeP + powf(1.0-slopeX, slopeA))
 }
-
-public func linlin( val:Double,  inMin:Double,  inMax:Double,  outMin:Double,  outMax:Double) -> Double {
-    return ((val - inMin) / (inMax - inMin) * (outMax - outMin)) + outMin;
+public func linlin( val: Double, inMin: Double, inMax: Double, outMin: Double, outMax: Double) -> Double {
+    return ((val - inMin) / (inMax - inMin) * (outMax - outMin)) + outMin
 }
-
-public func  linexp( val:Double,  inMin:Double,  inMax:Double,  outMin:Double,  outMax:Double) -> Double {
+public func  linexp( val: Double, inMin: Double, inMax: Double, outMin: Double, outMax: Double) -> Double {
     //clipping
-    let valclamp = max(min(val, inMax), inMin);
-    return pow((outMax / outMin), (valclamp - inMin) / (inMax - inMin)) * outMin;
+    let valclamp = max(min(val, inMax), inMin)
+    return pow((outMax / outMin), (valclamp - inMin) / (inMax - inMin)) * outMin
 }
-public func explin(val:Double,  inMin:Double,  inMax:Double,  outMin:Double,  outMax:Double) -> Double {
+public func explin(val: Double, inMin: Double, inMax: Double, outMin: Double, outMax: Double) -> Double {
     //clipping
-    let valclamp = max(min(val, inMax), inMin);
-    return (log(valclamp/inMin) / log(inMax/inMin) * (outMax - outMin)) + outMin;
+    let valclamp = max(min(val, inMax), inMin)
+    return (log(valclamp/inMin) / log(inMax/inMin) * (outMax - outMin)) + outMin
 }

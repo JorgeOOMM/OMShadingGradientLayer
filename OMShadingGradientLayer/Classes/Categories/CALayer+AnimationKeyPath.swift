@@ -25,45 +25,36 @@
 
 import UIKit
 public extension CALayer {
-    
     // MARK: - CALayer Animation Helpers
-    
-    func animationActionForKey(_ event:String!) -> CABasicAnimation! {
+    func animationActionForKey(_ event: String!) -> CABasicAnimation! {
         let animation = CABasicAnimation(keyPath: event)
-        //animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunction.linear)
-        animation.fromValue = self.presentation()!.value(forKey: event);
+        // animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunction.linear)
+        animation.fromValue = self.presentation()!.value(forKey: event)
         return animation
     }
-    
-    func animateKeyPath(_ keyPath : String,
-                               fromValue : AnyObject?,
-                               toValue:AnyObject?,
-                               beginTime:TimeInterval,
-                               duration:TimeInterval,
-                               delegate:AnyObject?)
-    {
-        let animation = CABasicAnimation(keyPath:keyPath);
-        
+    func animateKeyPath(_ keyPath: String,
+                        fromValue: AnyObject?,
+                        toValue: AnyObject?,
+                        beginTime: TimeInterval,
+                        duration: TimeInterval,
+                        delegate: AnyObject?) {
+        let animation = CABasicAnimation(keyPath: keyPath)
         var currentValue: AnyObject? = self.presentation()?.value(forKey: keyPath) as AnyObject?
-        
-        if (currentValue == nil) {
+        if currentValue == nil {
             currentValue = fromValue
         }
-        
         animation.fromValue = currentValue
         animation.toValue   = toValue
         animation.delegate  = delegate as! CAAnimationDelegate?
-        
-        if(duration > 0.0){
+        if duration > 0.0 {
             animation.duration = duration
         }
-        if(beginTime > 0.0){
+        if beginTime > 0.0 {
             animation.beginTime = beginTime
         }
-        
-        //animation.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.linear)
-        animation.setValue(self,forKey:keyPath)
-        self.add(animation, forKey:keyPath)
-        self.setValue(toValue,forKey:keyPath)
+        // animation.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.linear)
+        animation.setValue(self, forKey: keyPath)
+        self.add(animation, forKey: keyPath)
+        self.setValue(toValue, forKey: keyPath)
     }
 }

@@ -79,291 +79,291 @@ public typealias EasingFunctionsTuple = (function: EasingFunction, name: String)
 //
 
 // Modeled after the line y = x
-func Linear(_ p: Double) -> Double
+func linear(_ easingParam: Double) -> Double
 {
-    return p;
+    return easingParam;
 }
 
 // Modeled after the parabola y = x^2
-func QuadraticEaseIn(_ p: Double) -> Double
+func quadraticEaseIn(_ easingParam: Double) -> Double
 {
-    return p * p;
+    return easingParam * easingParam;
 }
 
 // Modeled after the parabola y = -x^2 + 2x
-func QuadraticEaseOut(_ p: Double) -> Double
+func quadraticEaseOut(_ easingParam: Double) -> Double
 {
-    return -(p * (p - 2));
+    return -(easingParam * (easingParam - 2));
 }
 
 // Modeled after the piecewise quadratic
 // y = (1/2)((2x)^2)             ; [0, 0.5)
 // y = -(1/2)((2x-1)*(2x-3) - 1) ; [0.5, 1]
-func QuadraticEaseInOut(_ p: Double) -> Double
+func quadraticEaseInOut(_ easingParam: Double) -> Double
 {
-    if(p < 0.5)
+    if(easingParam < 0.5)
     {
-        return 2 * p * p;
+        return 2 * easingParam * easingParam;
     }
     else
     {
-        return (-2 * p * p) + (4 * p) - 1;
+        return (-2 * easingParam * easingParam) + (4 * easingParam) - 1;
     }
 }
 
 // Modeled after the cubic y = x^3
-func CubicEaseIn(_ p: Double) -> Double
+func cubicEaseIn(_ easingParam: Double) -> Double
 {
-    return p * p * p;
+    return easingParam * easingParam * easingParam;
 }
 
 // Modeled after the cubic y = (x - 1)^3 + 1
-func CubicEaseOut(_ p: Double) -> Double
+func cubicEaseOut(_ easingParam: Double) -> Double
 {
-    let f = (p - 1);
-    return f * f * f + 1;
+    let easingConst = (easingParam - 1);
+    return easingConst * easingConst * easingConst + 1;
 }
 
 // Modeled after the piecewise cubic
 // y = (1/2)((2x)^3)       ; [0, 0.5)
 // y = (1/2)((2x-2)^3 + 2) ; [0.5, 1]
-func CubicEaseInOut(_ p: Double) -> Double
+func cubicEaseInOut(_ easingParam: Double) -> Double
 {
-    if(p < 0.5)
+    if(easingParam < 0.5)
     {
-        return 4 * p * p * p;
+        return 4 * easingParam * easingParam * easingParam;
     }
     else
     {
-        let f = ((2 * p) - 2);
-        return 0.5 * f * f * f + 1;
+        let easingConst = ((2 * easingParam) - 2);
+        return 0.5 * easingConst * easingConst * easingConst + 1;
     }
 }
 
 // Modeled after the quartic x^4
-func QuarticEaseIn(_ p: Double) -> Double
+func quarticEaseIn(_ easingParam: Double) -> Double
 {
-    return p * p * p * p;
+    return easingParam * easingParam * easingParam * easingParam;
 }
 
 // Modeled after the quartic y = 1 - (x - 1)^4
-func QuarticEaseOut(_ p: Double) -> Double
+func quarticEaseOut(_ easingParam: Double) -> Double
 {
-    let f = (p - 1);
-    return f * f * f * (1 - p) + 1;
+    let easingConst = (easingParam - 1);
+    return easingConst * easingConst * easingConst * (1 - easingParam) + 1;
 }
 
 // Modeled after the piecewise quartic
 // y = (1/2)((2x)^4)        ; [0, 0.5)
 // y = -(1/2)((2x-2)^4 - 2) ; [0.5, 1]
-func QuarticEaseInOut(_ p: Double) -> Double
+func quarticEaseInOut(_ easingParam: Double) -> Double
 {
-    if(p < 0.5)
+    if(easingParam < 0.5)
     {
-        return 8 * p * p * p * p;
+        return 8 * easingParam * easingParam * easingParam * easingParam;
     }
     else
     {
-        let f = (p - 1);
-        return -8 * f * f * f * f + 1;
+        let easingConst = (easingParam - 1);
+        return -8 * easingConst * easingConst * easingConst * easingConst + 1;
     }
 }
 
 // Modeled after the quintic y = x^5
-func QuinticEaseIn(_ p: Double) -> Double
+func quinticEaseIn(_ easingParam: Double) -> Double
 {
-    return p * p * p * p * p;
+    return easingParam * easingParam * easingParam * easingParam * easingParam;
 }
 
 // Modeled after the quintic y = (x - 1)^5 + 1
-func QuinticEaseOut(_ p: Double) -> Double
+func quinticEaseOut(_ easingParam: Double) -> Double
 {
-    let f = (p - 1);
-    return f * f * f * f * f + 1;
+    let easingConst = (easingParam - 1);
+    return easingConst * easingConst * easingConst * easingConst * easingConst + 1;
 }
 
 // Modeled after the piecewise quintic
 // y = (1/2)((2x)^5)       ; [0, 0.5)
 // y = (1/2)((2x-2)^5 + 2) ; [0.5, 1]
-func QuinticEaseInOut(_ p: Double) -> Double
+func quinticEaseInOut(_ easingParam: Double) -> Double
 {
-    if(p < 0.5)
+    if(easingParam < 0.5)
     {
-        return 16 * p * p * p * p * p;
+        return 16 * easingParam * easingParam * easingParam * easingParam * easingParam;
     }
     else
     {
-        let f = ((2 * p) - 2);
-        return  0.5 * f * f * f * f * f + 1;
+        let easingConst = ((2 * easingParam) - 2);
+        return  0.5 * easingConst * easingConst * easingConst * easingConst * easingConst + 1;
     }
 }
 
 // Modeled after quarter-cycle of sine wave
-func SineEaseIn(_ p: Double) -> Double
+func sineEaseIn(_ easingParam: Double) -> Double
 {
-    return sin((p - 1) * .pi / 2.0) + 1;
+    return sin((easingParam - 1) * .pi / 2.0) + 1;
 }
 
 // Modeled after quarter-cycle of sine wave (different phase)
-func SineEaseOut(_ p: Double) -> Double
+func sineEaseOut(_ easingParam: Double) -> Double
 {
-    return sin(p * .pi / 2.0);
+    return sin(easingParam * .pi / 2.0);
 }
 
 // Modeled after half sine wave
-func SineEaseInOut(_ p: Double) -> Double
+func sineEaseInOut(_ easingParam: Double) -> Double
 {
-    return 0.5 * (1 - cos(p * .pi));
+    return 0.5 * (1 - cos(easingParam * .pi));
 }
 
 // Modeled after shifted quadrant IV of unit circle
-func CircularEaseIn(_ p: Double) -> Double
+func circularEaseIn(_ easingParam: Double) -> Double
 {
-    return 1 - sqrt(1 - (p * p));
+    return 1 - sqrt(1 - (easingParam * easingParam));
 }
 
 // Modeled after shifted quadrant II of unit circle
-func CircularEaseOut(_ p: Double) -> Double
+func circularEaseOut(_ easingParam: Double) -> Double
 {
-    return sqrt((2 - p) * p);
+    return sqrt((2 - easingParam) * easingParam);
 }
 
 // Modeled after the piecewise circular function
 // y = (1/2)(1 - sqrt(1 - 4x^2))           ; [0, 0.5)
 // y = (1/2)(sqrt(-(2x - 3)*(2x - 1)) + 1) ; [0.5, 1]
-func CircularEaseInOut(_ p: Double) -> Double
+func circularEaseInOut(_ easingParam: Double) -> Double
 {
-    if(p < 0.5)
+    if(easingParam < 0.5)
     {
-        return 0.5 * (1 - sqrt(1 - 4 * (p * p)));
+        return 0.5 * (1 - sqrt(1 - 4 * (easingParam * easingParam)));
     }
     else
     {
-        return 0.5 * (sqrt(-((2 * p) - 3) * ((2 * p) - 1)) + 1);
+        return 0.5 * (sqrt(-((2 * easingParam) - 3) * ((2 * easingParam) - 1)) + 1);
     }
 }
 
 // Modeled after the exponential function y = 2^(10(x - 1))
-func ExponentialEaseIn(_ p: Double) -> Double
+func exponentialEaseIn(_ easingParam: Double) -> Double
 {
-    return (p == 0.0) ? p : pow(2, 10 * (p - 1));
+    return (easingParam == 0.0) ? easingParam : pow(2, 10 * (easingParam - 1));
 }
 
 // Modeled after the exponential function y = -2^(-10x) + 1
-func ExponentialEaseOut(_ p: Double) -> Double
+func exponentialEaseOut(_ easingParam: Double) -> Double
 {
-    return (p == 1.0) ? p : 1 - pow(2, -10 * p);
+    return (easingParam == 1.0) ? easingParam : 1 - pow(2, -10 * easingParam);
 }
 
 // Modeled after the piecewise exponential
 // y = (1/2)2^(10(2x - 1))         ; [0,0.5)
 // y = -(1/2)*2^(-10(2x - 1))) + 1 ; [0.5,1]
-func ExponentialEaseInOut(_ p: Double) -> Double
+func exponentialEaseInOut(_ easingParam: Double) -> Double
 {
-    if(p == 0.0 || p == 1.0) {return p;}
+    if(easingParam == 0.0 || easingParam == 1.0) {return easingParam;}
     
-    if(p < 0.5)
+    if(easingParam < 0.5)
     {
-        return 0.5 * pow(2, (20 * p) - 10);
+        return 0.5 * pow(2, (20 * easingParam) - 10);
     }
     else
     {
-        return -0.5 * pow(2, (-20 * p) + 10) + 1;
+        return -0.5 * pow(2, (-20 * easingParam) + 10) + 1;
     }
 }
 
 // Modeled after the damped sine wave y = sin(13pi/2*x)*pow(2, 10 * (x - 1))
-func ElasticEaseIn(_ p: Double) -> Double
+func elasticEaseIn(_ easingParam: Double) -> Double
 {
-    return sin(13 * .pi / 2.0 * p) * pow(2, 10 * (p - 1));
+    return sin(13 * .pi / 2.0 * easingParam) * pow(2, 10 * (easingParam - 1));
 }
 
 // Modeled after the damped sine wave y = sin(-13pi/2*(x + 1))*pow(2, -10x) + 1
-func ElasticEaseOut(_ p: Double) -> Double
+func elasticEaseOut(_ easingParam: Double) -> Double
 {
-    return sin(-13 * .pi / 2.0 * (p + 1)) * pow(2, -10 * p) + 1;
+    return sin(-13 * .pi / 2.0 * (easingParam + 1)) * pow(2, -10 * easingParam) + 1;
 }
 
 // Modeled after the piecewise exponentially-damped sine wave:
 // y = (1/2)*sin(13pi/2*(2*x))*pow(2, 10 * ((2*x) - 1))      ; [0,0.5)
 // y = (1/2)*(sin(-13pi/2*((2x-1)+1))*pow(2,-10(2*x-1)) + 2) ; [0.5, 1]
-func ElasticEaseInOut(_ p: Double) -> Double
+func elasticEaseInOut(_ easingParam: Double) -> Double
 {
-    if(p < 0.5)
+    if(easingParam < 0.5)
     {
-        return 0.5 * sin(13 * .pi / 2.0 * (2 * p)) * pow(2, 10 * ((2 * p) - 1));
+        return 0.5 * sin(13 * .pi / 2.0 * (2 * easingParam)) * pow(2, 10 * ((2 * easingParam) - 1));
     }
     else
     {
-        return 0.5 * (sin(-13 * .pi / 2.0 * ((2 * p - 1) + 1)) * pow(2, -10 * (2 * p - 1)) + 2);
+        return 0.5 * (sin(-13 * .pi / 2.0 * ((2 * easingParam - 1) + 1)) * pow(2, -10 * (2 * easingParam - 1)) + 2);
     }
 }
 
 // Modeled after the overshooting cubic y = x^3-x*sin(x*pi)
-func BackEaseIn(_ p: Double) -> Double
+func backEaseIn(_ easingParam: Double) -> Double
 {
-    return p * p * p - p * sin(p * .pi);
+    return easingParam * easingParam * easingParam - easingParam * sin(easingParam * .pi);
 }
 
 // Modeled after overshooting cubic y = 1-((1-x)^3-(1-x)*sin((1-x)*pi))
-func BackEaseOut(_ p: Double) -> Double
+func backEaseOut(_ easingParam: Double) -> Double
 {
-    let f = (1 - p);
-    return 1 - (f * f * f - f * sin(f * .pi));
+    let easingConst = (1 - easingParam);
+    return 1 - (easingConst * easingConst * easingConst - easingConst * sin(easingConst * .pi));
 }
 
 // Modeled after the piecewise overshooting cubic function:
 // y = (1/2)*((2x)^3-(2x)*sin(2*x*pi))           ; [0, 0.5)
 // y = (1/2)*(1-((1-x)^3-(1-x)*sin((1-x)*pi))+1) ; [0.5, 1]
-func BackEaseInOut(_ p: Double) -> Double
+func backEaseInOut(_ easingParam: Double) -> Double
 {
-    if(p < 0.5)
+    if(easingParam < 0.5)
     {
-        let f = 2 * p;
-        return 0.5 * (f * f * f - f * sin(f * .pi));
+        let easingConst = 2 * easingParam;
+        return 0.5 * (easingConst * easingConst * easingConst - easingConst * sin(easingConst * .pi));
     }
     else
     {
-        let f = (1 - (2*p - 1));
-        let fsin = sin(f * .pi)
-        return 0.5 * (1 - (f * f * f - f * fsin)) + 0.5;
+        let easingConst = (1 - (2*easingParam - 1));
+        let fsin = sin(easingConst * .pi)
+        return 0.5 * (1 - (easingConst * easingConst * easingConst - easingConst * fsin)) + 0.5;
     }
 }
 
-func BounceEaseIn(_ p: Double) -> Double
+func bounceEaseIn(_ easingParam: Double) -> Double
 {
-    return 1 - BounceEaseOut(1 - p);
+    return 1 - bounceEaseOut(1 - easingParam);
 }
 
-func BounceEaseOut(_ p: Double) -> Double
+func bounceEaseOut(_ easingParam: Double) -> Double
 {
-    if(p < 4/11.0)
+    if(easingParam < 4/11.0)
     {
-        return (121 * p * p)/16.0;
+        return (121 * easingParam * easingParam)/16.0;
     }
-    else if(p < 8/11.0)
+    else if(easingParam < 8/11.0)
     {
-        return (363/40.0 * p * p) - (99/10.0 * p) + 17/5.0;
+        return (363/40.0 * easingParam * easingParam) - (99/10.0 * easingParam) + 17/5.0;
     }
-    else if(p < 9/10.0)
+    else if(easingParam < 9/10.0)
     {
-        return (4356/361.0 * p * p) - (35442/1805.0 * p) + 16061/1805.0;
+        return (4356/361.0 * easingParam * easingParam) - (35442/1805.0 * easingParam) + 16061/1805.0;
     }
     else
     {
-        return (54/5.0 * p * p) - (513/25.0 * p) + 268/25.0;
+        return (54/5.0 * easingParam * easingParam) - (513/25.0 * easingParam) + 268/25.0;
     }
 }
 
-func BounceEaseInOut(_ p: Double) -> Double
+func bounceEaseInOut(_ easingParam: Double) -> Double
 {
-    if(p < 0.5)
+    if(easingParam < 0.5)
     {
-        return 0.5 * BounceEaseIn(p*2);
+        return 0.5 * bounceEaseIn(easingParam*2);
     }
     else
     {
-        return 0.5 * BounceEaseOut(p * 2 - 1) + 0.5;
+        return 0.5 * bounceEaseOut(easingParam * 2 - 1) + 0.5;
     }
 }
 

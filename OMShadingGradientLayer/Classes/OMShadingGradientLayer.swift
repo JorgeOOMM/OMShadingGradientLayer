@@ -37,7 +37,7 @@ open class OMShadingGradientLayer : OMGradientLayer {
     }
     
     /// Slope function
-    open var slopeFunction: EasingFunction  = Linear {
+    open var slopeFunction: EasingFunction  = linear {
         didSet {
             setNeedsDisplay();
         }

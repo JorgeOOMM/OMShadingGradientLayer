@@ -39,7 +39,7 @@ public enum GradientFunction {
 
 // TODO(jom): add a black and with gradients
 
-func ShadingFunctionCreate(_ colors : [UIColor],
+func shadingFunctionCreate(_ colors : [UIColor],
                             locations : [CGFloat],
                             slopeFunction: @escaping GradientSlopeFunction,
                               interpolationFunction: @escaping GradientInterpolationFunction) -> (UnsafePointer<CGFloat>, UnsafeMutablePointer<CGFloat>) -> Void
@@ -126,7 +126,7 @@ func ShadingFunctionCreate(_ colors : [UIColor],
 }
 
 
-func ShadingCallback(_ infoPointer: UnsafeMutableRawPointer?,
+func shadingCallback(_ infoPointer: UnsafeMutableRawPointer?,
                      inData: UnsafePointer<CGFloat>,
                      outData: UnsafeMutablePointer<CGFloat>) -> Swift.Void {
     // Load the UnsafeMutableRawPointer, and call the shadingFunction
@@ -162,7 +162,7 @@ public class OMShadingGradient {
           extendStart: Bool = false,
           extendEnd: Bool = false,
           functionType: GradientFunction = .linear,
-          slopeFunction:  @escaping EasingFunction =  Linear) {
+          slopeFunction:  @escaping EasingFunction =  linear) {
         
         self.init(colors:colors,
                   locations: locations,
@@ -186,7 +186,7 @@ public class OMShadingGradient {
           extendStart: Bool = false,
           extendEnd: Bool = false,
           functionType: GradientFunction = .linear,
-          slopeFunction: @escaping EasingFunction =  Linear) {
+          slopeFunction: @escaping EasingFunction =  linear) {
         
         self.init(colors:colors,
                   locations: locations,
@@ -211,7 +211,7 @@ public class OMShadingGradient {
          extendEnd: Bool,
          gradientType : OMGradientType  = .axial,
          functionType : GradientFunction = .linear,
-         slopeFunction: @escaping EasingFunction  =  Linear)
+         slopeFunction: @escaping EasingFunction  =  linear)
     {
         self.locations   = locations
         self.startPoint  = startPoint
@@ -286,14 +286,14 @@ public class OMShadingGradient {
         }
         let colors = self.colors
         let locations =  self.locations
-        return ShadingFunctionCreate(colors,
+        return shadingFunctionCreate(colors,
                                      locations: locations!,
                                      slopeFunction: self.slopeFunction,
                                      interpolationFunction: interpolationFunction )
     }()
     
     lazy var handleFunction : CGFunction! = {
-        var callbacks = CGFunctionCallbacks(version: 0, evaluate: ShadingCallback, releaseInfo: nil)
+        var callbacks = CGFunctionCallbacks(version: 0, evaluate: shadingCallback, releaseInfo: nil)
         // https://www.cnblogs.com/zbblog/p/15774171.html
         let infoPointer = Unmanaged<OMShadingGradient>.passRetained(self).toOpaque()
         return CGFunction(info: infoPointer,             // info
@@ -305,7 +305,7 @@ public class OMShadingGradient {
     }()
     
     lazy var shadingHandle: CGShading? = {
-        var callbacks = CGFunctionCallbacks(version: 0, evaluate: ShadingCallback, releaseInfo: nil)
+        var callbacks = CGFunctionCallbacks(version: 0, evaluate: shadingCallback, releaseInfo: nil)
         if let handleFunction = self.handleFunction {
             if (self.gradientType == .axial) {
                 return CGShading(axialSpace: self.colorSpace,

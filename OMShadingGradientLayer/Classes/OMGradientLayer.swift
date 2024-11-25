@@ -189,28 +189,27 @@ open class OMGradientLayer : CALayer, OMGradientLayerProtocol {
     //  It takes four arguments: frame, colourA, colourB and the input value (0-1).
     //
     //  from: http://stackoverflow.com/a/29168654/6387073
-    
-
-    public class func pointsFromNormalizedAngle(_ normalizedAngle:Double) -> (CGPoint,CGPoint) {
+    public class func pointsFromNormalizedAngle(_ normalizedAngle: Double) -> (CGPoint, CGPoint) {
         
-        //x is between 0 and 1, eg. from a slider, representing 0 - 360 degrees
-        //colour A starts on top, with colour B below
-        //rotations move anti-clockwise
+        // x is between 0 and 1, eg. from a slider, representing 0 - 360 degrees
+        // colour A starts on top, with colour B below
+        // rotations move anti-clockwise
         
         //create coordinates
-        let r = 2.0 * .pi;
-        let a = pow(sin((r*((normalizedAngle+0.75)/2))),2);
-        let b = pow(sin((r*((normalizedAngle+0.0)/2))),2);
-        let c = pow(sin((r*((normalizedAngle+0.25)/2))),2);
-        let d = pow(sin((r*((normalizedAngle+0.5)/2))),2);
+        let radius = 2.0 * .pi
+        let gardientDirA = pow(sin((radius*((normalizedAngle+0.75)/2))),2)
+        let gardientDirB = pow(sin((radius*((normalizedAngle+0.0)/2))),2)
+        let gardientDirC = pow(sin((radius*((normalizedAngle+0.25)/2))),2)
+        let gardientDirD = pow(sin((radius*((normalizedAngle+0.5)/2))),2)
         
         //set the gradient direction
-        return (CGPoint(x: a, y: b),CGPoint(x: c, y: d))
+        return (CGPoint(x: gardientDirA, y: gardientDirB), 
+                CGPoint(x: gardientDirC, y: gardientDirD))
     }
     
     // MARK: - Object constructors
     required public init?(coder aDecoder: NSCoder) {
-        super.init(coder:aDecoder)
+        super.init(coder: aDecoder)
     }
     
     convenience public init(type:OMGradientType) {
@@ -258,25 +257,25 @@ open class OMGradientLayer : CALayer, OMGradientLayerProtocol {
     
     // MARK: - Functions
     override open class func needsDisplay(forKey event: String) -> Bool {
-        if (event == OMGradientLayerProperties.startPoint  ||
+        if event == OMGradientLayerProperties.startPoint  ||
             event == OMGradientLayerProperties.locations   ||
             event == OMGradientLayerProperties.colors      ||
             event == OMGradientLayerProperties.endPoint     ||
             event == OMGradientLayerProperties.startRadius ||
-            event == OMGradientLayerProperties.endRadius) {
+            event == OMGradientLayerProperties.endRadius {
             return true
         }
         return super.needsDisplay(forKey: event)
     }
     
     override open func action(forKey event: String) -> CAAction? {
-        if (event == OMGradientLayerProperties.startPoint ||
+        if event == OMGradientLayerProperties.startPoint ||
             event == OMGradientLayerProperties.locations   ||
             event == OMGradientLayerProperties.colors      ||
             event == OMGradientLayerProperties.endPoint    ||
             event == OMGradientLayerProperties.startRadius ||
-            event == OMGradientLayerProperties.endRadius) {
-            return animationActionForKey(event);
+            event == OMGradientLayerProperties.endRadius {
+            return animationActionForKey(event)
         }
         return super.action(forKey: event)
     }
@@ -289,7 +288,6 @@ open class OMGradientLayer : CALayer, OMGradientLayerProtocol {
     }
     
     func prepareContextIfNeeds(_ ctx:CGContext, scale:CGAffineTransform, closure:TransformContextClosure) {
-        
         let sp  = self.startPoint * self.bounds.size
         let ep  = self.endPoint   * self.bounds.size
         let mr  = minRadius(self.bounds.size)
@@ -308,8 +306,6 @@ open class OMGradientLayer : CALayer, OMGradientLayerProtocol {
         // Reset the context
         ctx.scaleBy(x: invS.x, y: invS.y);
     }
-    
-    
     func addPathAndClipIfNeeded(_ ctx:CGContext) {
         if (self.path != nil) {
             ctx.addPath(self.path!);
@@ -320,7 +316,6 @@ open class OMGradientLayer : CALayer, OMGradientLayerProtocol {
             ctx.clip();
         }
     }
-    
     func isDrawable() -> Bool {
         if (colors.count == 0) {
             // nothing to do
@@ -339,8 +334,6 @@ open class OMGradientLayer : CALayer, OMGradientLayerProtocol {
         }
         return true;
     }
-
-    
     override open var description:String {
         get {
             var currentDescription:String = "type: \((self.isAxial ? "Axial" : "Radial")) "
