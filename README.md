@@ -42,7 +42,7 @@ Open a issue.
 
 ## Credits
 
-OMShadingGradientLayer is owned and maintained by the [Jorge Ouahbi](https://twitter.com/a_c_r_a_t_a_).
+OMShadingGradientLayer is owned and maintained by [Jorge Ouahbi](https://github.com/JorgeOOMM).
 
 ## License
 
