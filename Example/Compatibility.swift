@@ -4,13 +4,9 @@
 //  Created by Jorge Ouahbi on 12/9/16.
 //  Copyright © 2016 Jorge Ouahbi. All rights reserved.
 //
-
 // Based on Erica Sadun code
 // https://gist.github.com/erica/c54826fd3411d6db053bfdfe1f64ab54
-
 import Foundation
-
-
 #if os(OSX)
     import Cocoa
     public typealias BezierPath         = NSBezierPath
@@ -34,19 +30,15 @@ import Foundation
     public typealias PanRecognizer      = UIPanGestureRecognizer
     public typealias Button             = UIButton
 #endif
-
-
 #if os(OSX)
     // UIKit Compatibility
     extension NSBezierPath {
         open func addLine(to point: CGPoint) {
             self.line(to: point)
         }
-        
         open func addCurve(to point: CGPoint, controlPoint1: CGPoint, controlPoint2: CGPoint) {
             self.curve(to: point, controlPoint1: controlPoint1, controlPoint2: controlPoint2)
         }
-        
         open func addQuadCurve(to point: CGPoint, controlPoint: CGPoint) {
             self.curve(to: point, controlPoint1: controlPoint, controlPoint2: controlPoint)
         }

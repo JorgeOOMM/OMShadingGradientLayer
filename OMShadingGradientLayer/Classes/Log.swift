@@ -15,7 +15,7 @@
 //
 
 //
-//  OMLog.swift
+//  Log.swift
 //
 //  Created by Jorge Ouahbi on 25/9/16.
 //  Copyright © 2016 Jorge Ouahbi. All rights reserved.
@@ -27,7 +27,8 @@ import Foundation
 
 // Based on : https://github.com/kostiakoval/SpeedLog
 
-///LogLevel type. Specify what level of details should be included to the log
+/// LogLevel type
+/// Specify what level of details should be included to the log
 public struct LogLevel : OptionSet {
     
     public let rawValue: UInt
@@ -51,10 +52,8 @@ public struct LogLevel : OptionSet {
     
 
 }
-
-
-///OMLog Type
-public struct OMLog {
+/// Log Type
+public struct Log {
     /// Log Mode
     public static var level: LogLevel = .NormalOptions
     
@@ -84,24 +83,34 @@ public struct OMLog {
     public static func print(_ items: Any..., level:LogLevel) {
         #if !DISABLE_LOG
             let stringItem = items.map {"\($0)"}.joined(separator: " ")
-            if (OMLog.level.contains(level)) {
+            if (Log.level.contains(level)) {
                 Swift.print("\(levelName(level: level)):\(stringItem)", terminator: "\n")
             }
         #endif
     }
-    public static func printd(_ items: Any..., level:LogLevel = .Debug) {
+    public static func d(_ items: Any..., level:LogLevel = .Debug) {
+        #if !DISABLE_LOG
             print(items,level:level);
+        #endif
     }
-    public static func printw(_ items: Any..., level:LogLevel = .Warning) {
+    public static func w(_ items: Any..., level:LogLevel = .Warning) {
+        #if !DISABLE_LOG
             print(items,level:level);
+        #endif
     }
-    public static func printi(_ items: Any..., level:LogLevel = .Info) {
+    public static func i(_ items: Any..., level:LogLevel = .Info) {
+        #if !DISABLE_LOG
             print(items,level:level);
+        #endif
     }
-    public static func printe(_ items: Any..., level:LogLevel = .Error) {
+    public static func e(_ items: Any..., level:LogLevel = .Error) {
+        #if !DISABLE_LOG
             print(items,level:level);
+        #endif
     }
-    public static func printv(_ items: Any..., level:LogLevel = .Verbose) {
+    public static func v(_ items: Any..., level:LogLevel = .Verbose) {
+        #if !DISABLE_LOG
             print(items,level:level);
+        #endif
     }
 }
