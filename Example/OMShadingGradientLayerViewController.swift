@@ -14,6 +14,8 @@
 //   limitations under the License.
 //
 import UIKit
+import GUILib
+
 let kDefaultAnimationDuration: TimeInterval = 5.0
 // MARK: OMShadingGradientLayerViewController: UITableViewDataSource, UITableViewDelegate
 extension OMShadingGradientLayerViewController: UITableViewDataSource, UITableViewDelegate {
@@ -67,7 +69,7 @@ class OMShadingGradientLayerViewController: UIViewController {
     var subviewForGradientLayer: OMGradientView<OMShadingGradientLayer>!
     var gradientLayer: OMShadingGradientLayer = OMShadingGradientLayer(type: .radial)
     var animateGradientLayer: Bool = true
-    var textLayer: OMTextLayer = OMTextLayer(string: "Hello text shading", font: UIFont(name: "Helvetica", size: 50)!)
+    var textLayer: OMTextLayer = OMTextLayer(string: "Hello shading", font: UIFont(name: "Helvetica", size: 50)!)
     lazy var slopeFunction: [(Double) -> Double] = {
         return [
             linear,
@@ -196,8 +198,8 @@ class OMShadingGradientLayerViewController: UIViewController {
         updateGradientLayer()
     }
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animate(alongsideTransition: {(UIViewControllerTransitionCoordinatorContext) in
-        }) {(UIViewControllerTransitionCoordinatorContext) in
+        coordinator.animate(alongsideTransition: {(animation) in
+        }) {(completion) in
             // update the gradient layer frame
             self.gradientLayer.frame = self.viewForGradientLayer.bounds
         }
@@ -221,15 +223,15 @@ class OMShadingGradientLayerViewController: UIViewController {
     }
     @IBAction func maskSwitchChanged(_ sender: UISwitch) {
         if sender.isOn {
-            let style = PolygonStyle(rawValue: Int(arc4random_uniform(6)))!
-            let radius = CGFloat(drand48()) * viewForGradientLayer.bounds.size.min()
-            let sides = Int(arc4random_uniform(32)) + 4
+            let style = PolygonStyle(rawValue: Int.random(in: 0..<6))!
+            let radius = CGFloat.random(in: 0..<1) * viewForGradientLayer.bounds.size.min
+            let sides = Int.random(in: 0..<32) + 4
             let path = UIBezierPath.polygon(frame: viewForGradientLayer.bounds,
                                             sides: sides,
                                             radius: radius,
                                             startAngle: 0,
                                             style: style,
-                                            percentInflection: CGFloat(drand48()))
+                                            percentInflection: CGFloat.random(in: 0..<1))
             gradientLayer.path  = path.cgPath
         } else {
             gradientLayer.path  = nil
@@ -241,19 +243,6 @@ class OMShadingGradientLayerViewController: UIViewController {
         self.gradientLayer.gradientType = sender.isOn ?  .radial : .axial
         updateGradientLayer()
     }
-    func updateSlopeFunction(_ index: Int) {
-        switch index {
-        case 0:
-            self.gradientLayer.function =  .linear
-        case 1:
-            self.gradientLayer.function =  .exponential
-        case 2:
-            self.gradientLayer.function =  .cosine
-        default:
-            self.gradientLayer.function =  .linear
-            assertionFailure()
-        }
-    }
     @IBAction func functionSwitchChanged(_ sender: UISegmentedControl) {
         updateSlopeFunction(sender.selectedSegmentIndex)
         updateGradientLayer()
@@ -264,22 +253,22 @@ class OMShadingGradientLayerViewController: UIViewController {
     }
     @IBAction func randomButtonTouchUpInside(_ sender: UIButton) {
         // random points
-        pointStartX.value = Float(CGFloat(drand48()))
-        pointStartY.value = Float(CGFloat(drand48()))
-        pointEndX.value   = Float(CGFloat(drand48()))
-        pointEndY.value   = Float(CGFloat(drand48()))
+        pointStartX.value = Float.random(in: 0..<1)
+        pointStartY.value = Float.random(in: 0..<1)
+        pointEndX.value   = Float.random(in: 0..<1)
+        pointEndY.value   = Float.random(in: 0..<1)
         // select random slope function
-        selectIndexPath(Int(arc4random()) % tableView.numberOfRows(inSection: 0))
-        let segmentIndex = Int(arc4random()) % segmenFunction.numberOfSegments
+        selectIndexPath(Int.random(in: 0..<tableView.numberOfRows(inSection: 0)))
+        let segmentIndex = Int.random(in: 0..<segmenFunction.numberOfSegments)
         updateSlopeFunction(segmentIndex)
         segmenFunction.selectedSegmentIndex = segmentIndex
-        typeGardientSwitch.isOn = Float(drand48()) > 0.5 ? true : false
-        extendsPastEnd.isOn  = Float(drand48()) > 0.5 ? true : false
-        extendsPastStart.isOn = Float(drand48()) > 0.5 ? true : false
+        typeGardientSwitch.isOn = Float.random(in: 0..<1) > 0.5 ? true : false
+        extendsPastEnd.isOn  = Float.random(in: 0..<1) > 0.5 ? true : false
+        extendsPastStart.isOn = Float.random(in: 0..<1) > 0.5 ? true : false
         if typeGardientSwitch.isOn {
             // random radius
-            endRadiusSlider.value   = Float(drand48())
-            startRadiusSlider.value = Float(drand48())
+            endRadiusSlider.value   = Float.random(in: 0..<1)
+            startRadiusSlider.value = Float.random(in: 0..<1)
             // random scale CGAffineTransform
             gradientLayer.radialTransform = CGAffineTransform.randomScale()
         }
@@ -289,19 +278,6 @@ class OMShadingGradientLayerViewController: UIViewController {
         updateTextPointsUI()
         // update the gradient layer
         updateGradientLayer()
-    }
-    // MARK: - Helpers
-    func randomizeColors() {
-        self.locations = []
-        self.colors.removeAll()
-        var numberOfColor = round(Float(drand48()) * 16)
-        while numberOfColor > 0 {
-            if let color = UIColor.random() {
-                self.colors.append(color)
-                numberOfColor -= 1
-            }
-        }
-        self.gradientLayer.colors = colors
     }
     func animateLayer(_ startPoint: CGPoint, _ endPoint: CGPoint, _ startRadius: Double, _ endRadius: Double) {
         let mediaTime =  CACurrentMediaTime()
@@ -320,13 +296,13 @@ class OMShadingGradientLayerViewController: UIViewController {
                                      delegate: nil)
         gradientLayer.animateKeyPath("startPoint",
                                      fromValue: NSValue(cgPoint: gradientLayer.startPoint),
-                                     toValue: NSValue(cgPoint:startPoint),
+                                     toValue: NSValue(cgPoint: startPoint),
                                      beginTime: mediaTime,
                                      duration: kDefaultAnimationDuration,
                                      delegate: nil)
         gradientLayer.animateKeyPath("endPoint",
-                                     fromValue: NSValue(cgPoint:gradientLayer.endPoint),
-                                     toValue: NSValue(cgPoint :endPoint),
+                                     fromValue: NSValue(cgPoint: gradientLayer.endPoint),
+                                     toValue: NSValue(cgPoint: endPoint),
                                      beginTime: mediaTime,
                                      duration: kDefaultAnimationDuration,
                                      delegate: nil)
@@ -345,6 +321,22 @@ class OMShadingGradientLayerViewController: UIViewController {
                                          delegate: nil)
         }
         CATransaction.commit()
+    }
+}
+
+extension OMShadingGradientLayerViewController {
+    // MARK: - Helpers
+    func randomizeColors() {
+        self.locations = []
+        self.colors.removeAll()
+        var numberOfColor = round(Float.random(in: 0..<1) * 16)
+        while numberOfColor > 0 {
+            if let color = UIColor.random() {
+                self.colors.append(color)
+                numberOfColor -= 1
+            }
+        }
+        self.gradientLayer.colors = colors
     }
     func updateGradientLayer() {
         viewForGradientLayer.layoutIfNeeded()
@@ -376,5 +368,18 @@ class OMShadingGradientLayerViewController: UIViewController {
         // radius text
         startRadiusSliderValueLabel.text = String(format: "%.1f", Double(startRadiusSlider.value))
         endRadiusSliderValueLabel.text   = String(format: "%.1f", Double(endRadiusSlider.value))
+    }
+    func updateSlopeFunction(_ index: Int) {
+        switch index {
+        case 0:
+            self.gradientLayer.function =  .linear
+        case 1:
+            self.gradientLayer.function =  .exponential
+        case 2:
+            self.gradientLayer.function =  .cosine
+        default:
+            self.gradientLayer.function =  .linear
+            assertionFailure()
+        }
     }
 }

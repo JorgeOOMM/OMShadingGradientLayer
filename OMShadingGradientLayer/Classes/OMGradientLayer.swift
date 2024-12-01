@@ -23,6 +23,7 @@
 
 
 import UIKit
+import GUILib
 
 public typealias  GradientColors = (UIColor,UIColor)
 typealias  TransformContextClosure = (_ ctx:CGContext, _ startPoint:CGPoint, _ endPoint:CGPoint, _ startRadius:CGFloat, _ endRadius:CGFloat) -> (Void)

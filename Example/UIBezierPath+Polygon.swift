@@ -158,7 +158,7 @@ extension UIBezierPath {
     }
     
     func applyCenteredPathTransform(_ transform: CGAffineTransform) {
-        let center = self.boundingBox().size.center()
+        let center = self.boundingBox().size.center
         var identity = CGAffineTransform.identity
         identity = identity.translatedBy(x: center.x, y: center.y)
         identity = transform.concatenating(identity)

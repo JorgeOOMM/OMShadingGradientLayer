@@ -24,6 +24,7 @@
 
 import Foundation
 import UIKit
+import GUILib
 
 // function slope
 typealias GradientSlopeFunction = EasingFunction

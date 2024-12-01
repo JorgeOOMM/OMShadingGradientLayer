@@ -37,8 +37,6 @@
 //      Added text to path helper function
 //  Versión 0.15 (30-11-2016)
 //      Added vertical alignment
-
-
 #if os(iOS)
     import UIKit
 #elseif os(OSX)
@@ -48,6 +46,7 @@
 import CoreGraphics
 import CoreText
 import CoreFoundation
+import GUILib
 
 @objc class OMTextLayer: CALayer {
     // MARK: properties
@@ -124,12 +123,12 @@ import CoreFoundation
             setNeedsDisplay()
         }
     }
-    var minimumLineHeight: CGFloat = 14 {
+    var minimumLineHeight: CGFloat = 0 {
         didSet {
             setNeedsDisplay()
         }
     }
-    var maximumLineHeight: CGFloat = 14 {
+    var maximumLineHeight: CGFloat = 0 {
         didSet {
             setNeedsDisplay()
         }

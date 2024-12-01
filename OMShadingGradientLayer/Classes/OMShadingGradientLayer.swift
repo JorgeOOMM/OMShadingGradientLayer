@@ -16,6 +16,7 @@
 
 
 import UIKit
+import GUILib
 
 open class OMShadingGradientLayer : OMGradientLayer {
     
