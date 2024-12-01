@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		047B0ABE2CFC711F00F5C5CB /* GUILib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047B0ABD2CFC711F00F5C5CB /* GUILib.framework */; };
-		3506A6881D9BD61F001C97BF /* UIBezierPath+Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3506A6871D9BD61F001C97BF /* UIBezierPath+Polygon.swift */; };
-		3506A68A1D9BD625001C97BF /* Compatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3506A6891D9BD625001C97BF /* Compatibility.swift */; };
 		35637A501DEACA9B0059A6B6 /* OMGradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35637A3B1DEACA9B0059A6B6 /* OMGradientLayer.swift */; };
 		35637A511DEACA9B0059A6B6 /* OMGradientLayerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35637A3C1DEACA9B0059A6B6 /* OMGradientLayerProtocols.swift */; };
 		35637A531DEACA9B0059A6B6 /* OMShadingGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35637A3E1DEACA9B0059A6B6 /* OMShadingGradient.swift */; };
@@ -24,8 +22,6 @@
 
 /* Begin PBXFileReference section */
 		047B0ABD2CFC711F00F5C5CB /* GUILib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GUILib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3506A6871D9BD61F001C97BF /* UIBezierPath+Polygon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Polygon.swift"; sourceTree = "<group>"; };
-		3506A6891D9BD625001C97BF /* Compatibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Compatibility.swift; sourceTree = "<group>"; };
 		35637A3B1DEACA9B0059A6B6 /* OMGradientLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OMGradientLayer.swift; sourceTree = "<group>"; };
 		35637A3C1DEACA9B0059A6B6 /* OMGradientLayerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OMGradientLayerProtocols.swift; sourceTree = "<group>"; };
 		35637A3E1DEACA9B0059A6B6 /* OMShadingGradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OMShadingGradient.swift; sourceTree = "<group>"; };
@@ -85,8 +81,6 @@
 			children = (
 				D1074000252175EC00953986 /* OMGradientView.swift */,
 				D1073FFB2521741100953986 /* OMTextLayer */,
-				3506A6891D9BD625001C97BF /* Compatibility.swift */,
-				3506A6871D9BD61F001C97BF /* UIBezierPath+Polygon.swift */,
 				35F0C59C1CC6D53B0076B308 /* OMShadingGradientLayerViewController.swift */,
 				35F0C5951CC6D53B0076B308 /* AppDelegate.swift */,
 				35F0C5991CC6D53B0076B308 /* Images.xcassets */,
@@ -218,12 +212,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				35637A511DEACA9B0059A6B6 /* OMGradientLayerProtocols.swift in Sources */,
-				3506A68A1D9BD625001C97BF /* Compatibility.swift in Sources */,
 				35F0C59D1CC6D53B0076B308 /* AppDelegate.swift in Sources */,
 				D1074001252175EC00953986 /* OMGradientView.swift in Sources */,
 				35F0C5A11CC6D53B0076B308 /* OMShadingGradientLayerViewController.swift in Sources */,
 				D1073FFD2521741100953986 /* OMTextLayer.swift in Sources */,
-				3506A6881D9BD61F001C97BF /* UIBezierPath+Polygon.swift in Sources */,
 				35637A531DEACA9B0059A6B6 /* OMShadingGradient.swift in Sources */,
 				35637A541DEACA9B0059A6B6 /* OMShadingGradientLayer.swift in Sources */,
 				35637A501DEACA9B0059A6B6 /* OMGradientLayer.swift in Sources */,
